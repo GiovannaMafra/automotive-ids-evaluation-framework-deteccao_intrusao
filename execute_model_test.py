@@ -13,7 +13,7 @@ from model_test import (
     pytorch_model_test,
     sklearn_model_test
 )
-from custom_metrics.path_utils import expand_user_paths
+from utils.path_utils import expand_user_paths
 
 AVAILABLE_FEATURE_GENERATORS = {
     "CNNIDSFeatureGenerator": cnn_ids_feature_generator.CNNIDSFeatureGenerator

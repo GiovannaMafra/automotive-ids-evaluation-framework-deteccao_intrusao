@@ -2,7 +2,7 @@ import argparse
 import json
 
 from feature_generator import cnn_ids_feature_generator
-from custom_metrics.path_utils import expand_user_paths
+from utils.path_utils import expand_user_paths
 
 AVAILABLE_FEATURE_GENERATORS = {
     "CNNIDSFeatureGenerator": cnn_ids_feature_generator.CNNIDSFeatureGenerator

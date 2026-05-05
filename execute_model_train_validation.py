@@ -12,7 +12,7 @@ from model_train_validation import (
     pytorch_model_train_validate,
     sklearn_model_train_validate
 )
-from custom_metrics.path_utils import expand_user_paths
+from utils.path_utils import expand_user_paths
 
 AVAILABLE_FEATURE_GENERATORS = {
     "CNNIDSFeatureGenerator": cnn_ids_feature_generator.CNNIDSFeatureGenerator
