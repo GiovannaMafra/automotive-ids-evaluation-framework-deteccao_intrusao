@@ -34,7 +34,7 @@ if [ ! -d ~/automotive-ids-evaluation-framework-deteccao_intrusao ]; then
     exit 1
 fi
 
-cp -r ~/test/automotive-ids-evaluation-framework-deteccao_intrusao .
+cp -r ~/automotive-ids-evaluation-framework-deteccao_intrusao .
 cd automotive-ids-evaluation-framework-deteccao_intrusao
 
 if [ ! -d ~/ids_venv ]; then
