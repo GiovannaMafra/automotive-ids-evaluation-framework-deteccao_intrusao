@@ -13,6 +13,7 @@ from model_test import (
     pytorch_model_test,
     sklearn_model_test
 )
+from utils.path_utils import expand_user_paths
 
 AVAILABLE_FEATURE_GENERATORS = {
     "CNNIDSFeatureGenerator": cnn_ids_feature_generator.CNNIDSFeatureGenerator
@@ -39,6 +40,7 @@ def main():
     try:
         with open(args.model_test_config, 'r') as model_test_config:
             model_test_config_dict = json.load(model_test_config)
+            model_test_config_dict = expand_user_paths(model_test_config_dict)
 
     except FileNotFoundError as e:
         print(f"parse_args: Error: {e}")

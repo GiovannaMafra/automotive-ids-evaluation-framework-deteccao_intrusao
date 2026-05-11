@@ -2,6 +2,7 @@ import argparse
 import json
 
 from feature_generator import cnn_ids_feature_generator
+from utils.path_utils import expand_user_paths
 
 AVAILABLE_FEATURE_GENERATORS = {
     "CNNIDSFeatureGenerator": cnn_ids_feature_generator.CNNIDSFeatureGenerator
@@ -16,6 +17,7 @@ def main():
     try:
         with open(args.feat_gen_config, 'r') as feat_gen_config:
             feat_gen_config_dict = json.load(feat_gen_config)
+            feat_gen_config_dict = expand_user_paths(feat_gen_config_dict)
 
     except FileNotFoundError as e:
         print(f"parse_args: Error: {e}")

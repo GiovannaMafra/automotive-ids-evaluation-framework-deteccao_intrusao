@@ -31,8 +31,8 @@ class SklearnModelTrainValidation(abstract_model_train_validate.AbstractModelTra
         self._hyperparameters_grid = model_config_dict.get("hyperparams_grid", None)
 
         # TODO: Get this from json config file
-        art_path = "/home/lfml/workspace/artifacts"
-        self._artifacts_path = f"{art_path}/{self._run_id}"
+        art_path = "~/workspace/artifacts"
+        self._artifacts_path = os.path.expanduser(f"{art_path}/{self._run_id}")
 
         if not os.path.exists(self._artifacts_path):
             os.makedirs(self._artifacts_path)
