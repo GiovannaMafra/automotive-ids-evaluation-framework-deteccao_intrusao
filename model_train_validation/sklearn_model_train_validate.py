@@ -31,7 +31,7 @@ class SklearnModelTrainValidation(abstract_model_train_validate.AbstractModelTra
         self._hyperparameters_grid = model_config_dict.get("hyperparams_grid", None)
 
         # TODO: Get this from json config file
-        art_path = "~/workspace/artifacts"
+        art_path = "artifacts"
         self._artifacts_path = os.path.expanduser(f"{art_path}/{self._run_id}")
 
         if not os.path.exists(self._artifacts_path):

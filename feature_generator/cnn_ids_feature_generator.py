@@ -1,4 +1,5 @@
 import gc
+import os
 import pandas as pd
 import numpy as np
 import typing
@@ -87,6 +88,9 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
         print(">> Aggregating and labeling...")
         aggregated_X, aggregated_y = self.__aggregate_based_on_window_size(preprocessed_packets, labels)
 
+        if not os.path.exists(paths_dictionary['output_path']):
+            os.makedirs(paths_dictionary['output_path'])
+        
         np.savez(f"{paths_dictionary['output_path']}/X_{self._data_suffix}_{self._output_path_suffix}", aggregated_X)
 
         y_df = pd.DataFrame(aggregated_y, columns=["Class"])
