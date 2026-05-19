@@ -15,19 +15,19 @@ chmod 700 "$cdir"
 cd "$cdir"
 
 function clean_up {
+    echo ">> Iniciando sincronização de arquivos e limpeza do node..."
     # before cleanup rsync data back to home directory
     sync_src="$cdir/automotive-ids-evaluation-framework-deteccao_intrusao"
     if [ -d "$sync_src" ]; then
-        rsync -av --exclude='*__pycache__*' --exclude='.git' "$sync_src" ~/automotive-ids-evaluation-framework-deteccao_intrusao/
+        rsync -av --exclude='*__pycache__*' --exclude='.git' "$sync_src/" ~/automotive-ids-evaluation-framework-deteccao_intrusao/
     else
         echo "Warning: source directory '$sync_src' does not exist, skipping rsync."
     fi
 
-    cd "$cdir" || exit 1
-    cd .. || exit 1
-    
-    rm -rf "${cdir:?}"
-    exit
+   # Apenas sobe para a pasta pai para poder deletar a temporária com segurança
+    cd ..
+    rm -rf "$cdir"
+    echo ">> Limpeza concluída."
 }
 
 trap 'clean_up' EXIT SIGTERM
