@@ -83,18 +83,18 @@ source ~/ids_venv/bin/activate
 # sleep infinity
 
 # feature generation
-python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_sumX_train.json ## for RF
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_sumX_train.json ## for RF
 python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Oneclass_train.json ## for RF
 
-python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_train.json ## for CNN
-python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_train.json ## for CNN
-python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_sumX_train.json ## for CNN with sumX
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_train.json ## for CNN
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_train.json ## for CNN
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_sumX_train.json ## for CNN with sumX
 
 # training and validation
-python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/AVTP_RandomForest_train.json ## for RF
-python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/TOW_RandomForest_train.json ## for RF
-python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/AVTP_PrunedCNNIDS_train.json ## for CNN
-python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/TOW_PrunedCNNIDS_Multiclass_train.json ## for CNN
+#python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/AVTP_RandomForest_train.json ## for RF
+#python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/TOW_RandomForest_train.json ## for RF
+#python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/AVTP_PrunedCNNIDS_train.json ## for CNN
+#python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/TOW_PrunedCNNIDS_Multiclass_train.json ## for CNN
 
 # detection time evaluation
 # python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/AVTP_RandomForest_detection_time.json
