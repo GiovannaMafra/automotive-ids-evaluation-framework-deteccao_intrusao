@@ -5,7 +5,6 @@ import numpy as np
 import typing
 import time
 from scapy.all import *
-from scapy.utils import PcapReader  
 
 
 from . import abstract_feature_generator
