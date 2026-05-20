@@ -188,7 +188,7 @@ class SklearnModelTrainValidation(abstract_model_train_validate.AbstractModelTra
             self._metrics_list.append(train_metrics)
             self._metrics_list.append(test_metrics)
             # Export the current fold model
-            model_filename = f"{self._model_name}_fold_{fold}.pkl"
+            model_filename = f"{self._model_name}_fold_{fold}_our.pkl"
             with open(f"{self._models_output_path}/{model_filename}", "wb") as file:
                 pickle.dump(self._model, file)
 

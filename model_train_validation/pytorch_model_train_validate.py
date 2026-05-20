@@ -100,7 +100,7 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
         self._model.eval()
 
         if fold is not None:
-            output_filename = f"{self._models_output_path}/pytorch_model_{self._model_name}_{fold}"
+            output_filename = f"{self._models_output_path}/pytorch_model_{self._model_name}_{fold}_our"
         else:
             output_filename = f"{self._models_output_path}/pytorch_model_{self._model_name}_entire_dataset"
 
