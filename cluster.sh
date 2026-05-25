@@ -100,6 +100,6 @@ python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generat
 # python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/AVTP_RandomForest_detection_time.json
 # python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/TOW_RandomForest_detection_time.json
 # python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/AVTP_PrunedCNNIDS_detection_time.json
-# python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/TOW_MC_PrunedCNNIDS_detection_time.json.json
+# python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/TOW_MC_PrunedCNNIDS_detection_time.json
 
 echo "Finish"   
