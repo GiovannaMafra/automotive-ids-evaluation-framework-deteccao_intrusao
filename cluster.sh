@@ -19,7 +19,7 @@ function clean_up {
     # before cleanup rsync data back to home directory
     sync_src="$cdir/automotive-ids-evaluation-framework-deteccao_intrusao"
     if [ -d "$sync_src" ]; then
-        rsync -av --exclude='*__pycache__*' --exclude='.git' "$sync_src/" ~/automotive-ids-evaluation-framework-deteccao_intrusao/
+        rsync -av --exclude='*__pycache__*' --exclude='slurm*' --exclude='.git' "$sync_src/" ~/automotive-ids-evaluation-framework-deteccao_intrusao/
     else
         echo "Warning: source directory '$sync_src' does not exist, skipping rsync."
     fi
