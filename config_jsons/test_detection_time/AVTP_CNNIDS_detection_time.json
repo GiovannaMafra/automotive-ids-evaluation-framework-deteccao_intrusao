@@ -10,8 +10,8 @@
             "dataset": "AVTP_Intrusion_dataset"
         },
         "load_paths": {
-            "X_path": "/content/automotive-ids-evaluation-framework/sample_inputs/sample_input_network_traffic_imaging.npz",
-            "y_path": "/content/automotive-ids-evaluation-framework/sample_inputs/sample_label_one_class_avtp_rounded.npz"
+            "X_path": "sample_inputs/sample_input_network_traffic_imaging.npz",
+            "y_path": "sample_inputs/sample_label_one_class_avtp_rounded.npz"
         }
     },
     "model_specs": {
@@ -27,15 +27,15 @@
             "num_outputs": 1
         },
         "paths": {
-            "metrics_output_path":"/home/lfml/workspace/metrics",
-            "models_output_path":"/home/lfml/workspace/models"
+            "metrics_output_path":"metrics",
+            "models_output_path":"models"
         },
         "presaved_paths": {
-            "0": "/home/lfml/workspace/automotive-ids-evaluation-framework/trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_0",
-            "1": "/home/lfml/workspace/automotive-ids-evaluation-framework/trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_1",
-            "2": "/home/lfml/workspace/automotive-ids-evaluation-framework/trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_2",
-            "3": "/home/lfml/workspace/automotive-ids-evaluation-framework/trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_3",
-            "4": "/home/lfml/workspace/automotive-ids-evaluation-framework/trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_4"
+            "0": "trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_0",
+            "1": "trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_1",
+            "2": "trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_2",
+            "3": "trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_3",
+            "4": "trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_4"
         }
     }
 }

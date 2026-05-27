@@ -12,6 +12,7 @@ from model_train_validation import (
     pytorch_model_train_validate,
     sklearn_model_train_validate
 )
+from utils.path_utils import expand_user_paths
 
 AVAILABLE_FEATURE_GENERATORS = {
     "CNNIDSFeatureGenerator": cnn_ids_feature_generator.CNNIDSFeatureGenerator
@@ -37,6 +38,7 @@ def main():
     try:
         with open(args.model_train_valid_config, 'r') as model_train_valid_config:
             model_train_valid_config_dict = json.load(model_train_valid_config)
+            model_train_valid_config_dict = expand_user_paths(model_train_valid_config_dict)
 
     except FileNotFoundError as e:
         print(f"parse_args: Error: {e}")

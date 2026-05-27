@@ -33,8 +33,8 @@ class SklearnModelTest(abstract_model_test.AbstractModelTest):
         self._run_id = f"{datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}_sklearn_test"
 
         # TODO: Get this from json config file
-        art_path = "/home/lfml/workspace/artifacts"
-        self._artifacts_path = f"{art_path}/{self._run_id}"
+        art_path = "artifacts"
+        self._artifacts_path = os.path.expanduser(f"{art_path}/{self._run_id}")
 
         if not os.path.exists(self._artifacts_path):
             os.makedirs(self._artifacts_path)
@@ -88,8 +88,8 @@ class SklearnModelTest(abstract_model_test.AbstractModelTest):
         self.__seed_all(0)
 
         # Get item from train data
-        X_test_full = [item[0] for item in data]
-        y_test_full = [item[1] for item in data]
+        X_test_full = np.array([item[0] for item in data])
+        y_test_full = np.array([item[1] for item in data])
 
         unique_y_values = np.unique(y_test_full)
         # 0 is equal to the normal label, > 0 is equal to attack (in TOW-IDS)
