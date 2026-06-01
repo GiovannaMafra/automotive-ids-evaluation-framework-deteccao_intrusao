@@ -10,8 +10,8 @@
             "dataset": "TOW_IDS_dataset"
         },
         "load_paths": {
-            "X_path": "~/workspace/datasets/tow-intrusion-dataset/processed_final/1510_X_test_TOW_IDS_dataset_multi_class_Wsize_44_Cols_116_Wslide_1_MC_True.npz",
-            "y_path": "~/workspace/datasets/tow-intrusion-dataset/processed_final/1510_y_test_TOW_IDS_dataset_multi_class_Wsize_44_Cols_116_Wslide_1_MC_True.csv"
+            "X_path": "datasets/tow-intrusion-dataset/processed_final/1510_X_test_TOW_IDS_dataset_multi_class_Wsize_44_Cols_116_Wslide_1_MC_True.npz",
+            "y_path": "datasets/tow-intrusion-dataset/processed_final/1510_y_test_TOW_IDS_dataset_multi_class_Wsize_44_Cols_116_Wslide_1_MC_True.csv"
         }
     },
     "model_specs": {
@@ -27,12 +27,12 @@
             "num_outputs": 6
         },
         "paths": {
-            "metrics_output_path":"~/workspace/metrics",
-            "models_output_path":"~/workspace/models",
-            "forward_output_path":"~/workspace/forward"
+            "metrics_output_path":"metrics",
+            "models_output_path":"models",
+            "forward_output_path":"forward"
         },
         "presaved_paths": {
-            "entire": "~/workspace/final_trained_models/tow_dataset/2023_10_15_02_04_21_pytorch_train_TOW_PrunedCNN_entire/models/TOW_pytorch_model_PrunedCNNIDS_entire_dataset"
+            "entire": "final_trained_models/tow_dataset/2023_10_15_02_04_21_pytorch_train_TOW_PrunedCNN_entire/models/TOW_pytorch_model_PrunedCNNIDS_entire_dataset"
         }
     }
 }
