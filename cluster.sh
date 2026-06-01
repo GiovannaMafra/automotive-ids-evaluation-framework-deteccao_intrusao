@@ -15,19 +15,19 @@ chmod 700 "$cdir"
 cd "$cdir"
 
 function clean_up {
+    echo ">> Iniciando sincronização de arquivos e limpeza do node..."
     # before cleanup rsync data back to home directory
     sync_src="$cdir/automotive-ids-evaluation-framework-deteccao_intrusao"
     if [ -d "$sync_src" ]; then
-        rsync -av --exclude='*__pycache__*' --exclude='.git' "$sync_src" ~/automotive-ids-evaluation-framework-deteccao_intrusao/
+        rsync -av --exclude='*__pycache__*' --exclude='slurm*' --exclude='.git' "$sync_src/" ~/automotive-ids-evaluation-framework-deteccao_intrusao/
     else
         echo "Warning: source directory '$sync_src' does not exist, skipping rsync."
     fi
 
-    cd "$cdir" || exit 1
-    cd .. || exit 1
-    
-    rm -rf "${cdir:?}"
-    exit
+   # Apenas sobe para a pasta pai para poder deletar a temporária com segurança
+    cd ..
+    rm -rf "$cdir"
+    echo ">> Limpeza concluída."
 }
 
 trap 'clean_up' EXIT SIGTERM
@@ -42,7 +42,7 @@ if [ ! -d ~/automotive-ids-evaluation-framework-deteccao_intrusao ]; then
     exit 1
 fi
 
-cp -r ~/automotive-ids-evaluation-framework-deteccao_intrusao .
+rsync -av --exclude='.nfs*' ~/automotive-ids-evaluation-framework-deteccao_intrusao .
 cd automotive-ids-evaluation-framework-deteccao_intrusao
 
 if [ ! -d ~/ids_venv ]; then
@@ -83,23 +83,23 @@ source ~/ids_venv/bin/activate
 # sleep infinity
 
 # feature generation
-python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_sumX_train.json ## for RF
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_sumX_train.json ## for RF
 python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Oneclass_train.json ## for RF
 
-python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_train.json ## for CNN
-python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_train.json ## for CNN
-python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_sumX_train.json ## for CNN with sumX
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_train.json ## for CNN
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_train.json ## for CNN
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_sumX_train.json ## for CNN with sumX
 
 # training and validation
-python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/AVTP_RandomForest_train.json ## for RF
-python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/TOW_RandomForest_train.json ## for RF
-python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/AVTP_PrunedCNNIDS_train.json ## for CNN
-python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/TOW_PrunedCNNIDS_Multiclass_train.json ## for CNN
+#python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/AVTP_RandomForest_train.json ## for RF
+#python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/TOW_RandomForest_train.json ## for RF
+#python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/AVTP_PrunedCNNIDS_train.json ## for CNN
+#python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/TOW_PrunedCNNIDS_Multiclass_train.json ## for CNN
 
 # detection time evaluation
 # python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/AVTP_RandomForest_detection_time.json
 # python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/TOW_RandomForest_detection_time.json
 # python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/AVTP_PrunedCNNIDS_detection_time.json
-# python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/TOW_MC_PrunedCNNIDS_detection_time.json.json
+# python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/TOW_MC_PrunedCNNIDS_detection_time.json
 
 echo "Finish"   

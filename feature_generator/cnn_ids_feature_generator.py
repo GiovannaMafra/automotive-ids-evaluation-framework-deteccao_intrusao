@@ -6,6 +6,7 @@ import typing
 import time
 from scapy.all import *
 
+
 from . import abstract_feature_generator
 from . import labeling_schemas
 
@@ -54,26 +55,31 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
             raise KeyError(f"Selected dataset: {self._dataset} is NOT available for CNN IDS Feature Generator!")
 
         feature_generator = CNN_IDS_FEAT_GEN_AVAILABLE_DATASETS[self._dataset](paths_dictionary)
-
     def __tow_ids_dataset_generate_features(self, paths_dictionary: typing.Dict):
-        # Load raw packets
+        # Garante a criação da pasta ANTES de começar o processamento pesado
+        if not os.path.exists(paths_dictionary['output_path']):
+            os.makedirs(paths_dictionary['output_path'])
+
+        # Load raw labels
         labels = pd.read_csv(paths_dictionary["y_train_path"], header=None, names=["index", "Class", "Description"])
         labels = labels.drop(columns=["index"])
         converted_packets_list = []
-        raw_packets = rdpcap(paths_dictionary["training_packets_path"])
 
-        print(">> Loading raw packets...")
-        for raw_packet in raw_packets:
-            converted_packet = np.frombuffer(raw(raw_packet), dtype='uint8')
+        print(">> Loading raw packets using PcapReader (Memory Efficient)...")
+        
+        
+        with PcapReader(paths_dictionary["training_packets_path"]) as packets_stream:
+            for raw_packet in packets_stream:
+                converted_packet = np.frombuffer(raw(raw_packet), dtype='uint8')
 
-            converted_packet_len = len(converted_packet)
-            if converted_packet_len < self._number_of_bytes:
-                bytes_to_pad = self._number_of_bytes - converted_packet_len
-                converted_packet = np.pad(converted_packet, (0, bytes_to_pad), 'constant')
-            else:
-                converted_packet = converted_packet[0:self._number_of_bytes]
+                converted_packet_len = len(converted_packet)
+                if converted_packet_len < self._number_of_bytes:
+                    bytes_to_pad = self._number_of_bytes - converted_packet_len
+                    converted_packet = np.pad(converted_packet, (0, bytes_to_pad), 'constant')
+                else:
+                    converted_packet = converted_packet[0:self._number_of_bytes]
 
-            converted_packets_list.append(converted_packet)
+                converted_packets_list.append(converted_packet)
 
         converted_packets = np.array(converted_packets_list, dtype='uint8')
 
@@ -82,19 +88,17 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
         preprocessed_packets = self.__preprocess_raw_packets(converted_packets, split_into_nibbles=True)
 
         print(f"len_preprocessed_packets = {len(preprocessed_packets)}")
-        print(f"preprocessed_packets[0] = {preprocessed_packets[0]}")
 
         # Aggregate features and labels
         print(">> Aggregating and labeling...")
         aggregated_X, aggregated_y = self.__aggregate_based_on_window_size(preprocessed_packets, labels)
-
-        if not os.path.exists(paths_dictionary['output_path']):
-            os.makedirs(paths_dictionary['output_path'])
         
+        # Salvando os arquivos gerados
         np.savez(f"{paths_dictionary['output_path']}/X_{self._data_suffix}_{self._output_path_suffix}", aggregated_X)
 
         y_df = pd.DataFrame(aggregated_y, columns=["Class"])
         y_df.to_csv(f"{paths_dictionary['output_path']}/y_{self._data_suffix}_{self._output_path_suffix}.csv")
+        print(">> TOW processing finished successfully!")
 
     def __avtp_dataset_generate_features(self, paths_dictionary: typing.Dict):
         raw_injected_only_packets = self.__read_raw_packets(paths_dictionary['injected_only_frame_path'])
