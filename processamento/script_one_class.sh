@@ -28,6 +28,10 @@ echo ">> Criando a pasta de saída para as features geradas..."
 mkdir -p ~/can_train_test_concatenado/processed_one_class
 
 echo ">> Executando o framework (Gerador de Features One-Class)..."
+# Abre um sub-shell, vai até a pasta real do framework e roda o script lá de dentro
+cd /home/CIN/gmm8/automotive-ids-evaluation-framework-deteccao_intrusao
+
+echo ">> Executando o framework (Gerador de Features One-Class)..."
 chmod +x run_framework.sh
 ./run_framework.sh
 
