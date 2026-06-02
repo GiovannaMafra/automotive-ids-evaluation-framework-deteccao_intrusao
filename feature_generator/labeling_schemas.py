@@ -45,7 +45,7 @@ def tow_ids_multi_class_labeling_schema(y_sequence):
 
     return seq_y
 
-def can_train_test_one_class_labeling_schema(y_sequence):
+def can_train_and_test_one_class_labeling_schema(y_sequence):
     """
     Expects y_sequence as a dataframe containing 'attack' column.
     Se houver qualquer 1, a janela vira ataque (1).
@@ -54,7 +54,7 @@ def can_train_test_one_class_labeling_schema(y_sequence):
         return 1
     return 0
 
-def can_train_test_multi_class_labeling_schema(y_sequence):
+def can_train_and_test_multi_class_labeling_schema(y_sequence):
     """
     Expects y_sequence as a dataframe containing 'Attack_Type' column.
     Se houver ataques, retorna o nome do ataque mais frequente.
