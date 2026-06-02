@@ -17,6 +17,6 @@ cd /home/CIN/gmm8/automotive-ids-evaluation-framework-deteccao_intrusao
 SELECTED_MODEL_TRAIN_VALIDATE_CONFIG="config_jsons/model_train_validate/CAN_rf_train_one_class.json"
 
 echo ">> Iniciando o Treinamento do Random Forest (One-Class) para o CAN..."
-python3 execute_model_train_validation.py --config $SELECTED_MODEL_TRAIN_VALIDATE_CONFIG
+python3 execute_model_train_validation.py --model_train_valid_config $SELECTED_MODEL_TRAIN_VALIDATE_CONFIG
 
 echo ">> Treinamento concluído!"
