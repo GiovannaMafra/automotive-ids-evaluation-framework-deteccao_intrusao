@@ -56,10 +56,10 @@ def can_train_and_test_one_class_labeling_schema(y_sequence):
 
 def can_train_and_test_multi_class_labeling_schema(y_sequence):
     """
-    Expects y_sequence as a dataframe containing 'Attack_Type' column.
+    Expects y_sequence as a dataframe containing 'attack_Type' column.
     Se houver ataques, retorna o nome do ataque mais frequente.
     """
-    values_series = y_sequence['Attack_Type']
+    values_series = y_sequence['attack_Type']
     attacks_only = values_series[values_series != 'normal']
 
     if not attacks_only.empty:
