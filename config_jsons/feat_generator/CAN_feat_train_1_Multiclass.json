@@ -12,10 +12,10 @@
     },
     "paths": {
         "train_csv_path": "~/can_train_test_concatenado/train_01/concatenated_train.csv",
-        "output_path": "~/can_train_test_concatenado/processed_multi_class"
+        "output_path": "~/can_train_test_concatenado/processed_multi_class/train"
     },
     "load_paths": {
-        "X_path": "~/can_train_test_concatenado/processed_multi_class/X_train_can_train_test_multi_class_Wsize_44_Cols_24_Wslide_1_MC_True.npz",
-        "y_path": "~/can_train_test_concatenado/processed_multi_class/y_train_can_train_test_multi_class_Wsize_44_Cols_24_Wslide_1_MC_True.csv"
+        "X_path": "~/can_train_test_concatenado/processed_multi_class/train/X_train_can_train_test_multi_class_Wsize_44_Cols_24_Wslide_1_MC_True.npz",
+        "y_path": "~/can_train_test_concatenado/processed_multi_class/train/y_train_can_train_test_multi_class_Wsize_44_Cols_24_Wslide_1_MC_True.csv"
     }
 }
