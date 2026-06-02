@@ -44,3 +44,24 @@ def tow_ids_multi_class_labeling_schema(y_sequence):
         seq_y = indexes_attacks[INDEX_COLUMN].values[0]
 
     return seq_y
+
+def can_train_test_one_class_labeling_schema(y_sequence):
+    """
+    Expects y_sequence as a dataframe containing 'attack' column.
+    Se houver qualquer 1, a janela vira ataque (1).
+    """
+    if 1 in y_sequence['attack'].values or '1' in y_sequence['attack'].values:
+        return 1
+    return 0
+
+def can_train_test_multi_class_labeling_schema(y_sequence):
+    """
+    Expects y_sequence as a dataframe containing 'Attack_Type' column.
+    Se houver ataques, retorna o nome do ataque mais frequente.
+    """
+    values_series = y_sequence['Attack_Type']
+    attacks_only = values_series[values_series != 'normal']
+
+    if not attacks_only.empty:
+        return attacks_only.value_counts().idxmax()
+    return 'normal'

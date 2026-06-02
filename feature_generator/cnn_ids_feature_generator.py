@@ -21,7 +21,9 @@ DEFAULT_SUM_X = False
 LABELING_SCHEMA_FACTORY = {
     "AVTP_Intrusion_dataset": labeling_schemas.avtp_intrusion_labeling_schema,
     "TOW_IDS_dataset_one_class": labeling_schemas.tow_ids_one_class_labeling_schema,
-    "TOW_IDS_dataset_multi_class": labeling_schemas.tow_ids_multi_class_labeling_schema
+    "TOW_IDS_dataset_multi_class": labeling_schemas.tow_ids_multi_class_labeling_schema,
+    "can_train_and_test_multi_class": labeling_schemas.can_train_and_test_multi_class_labeling_schema,
+    "can_train_and_test_one_class": labeling_schemas.can_train_and_test_one_class_labeling_schema
 }
 
 class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator):
@@ -46,7 +48,8 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
     def generate_features(self, paths_dictionary: typing.Dict):
         CNN_IDS_FEAT_GEN_AVAILABLE_DATASETS = {
             "AVTP_Intrusion_dataset": self.__avtp_dataset_generate_features,
-            "TOW_IDS_dataset": self.__tow_ids_dataset_generate_features
+            "TOW_IDS_dataset": self.__tow_ids_dataset_generate_features,
+            "can_train_and_test": self.__can_train_and_test_generate_features
         }
 
         if self._dataset not in CNN_IDS_FEAT_GEN_AVAILABLE_DATASETS:
@@ -125,7 +128,73 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
 
             np.savez(f"{paths_dictionary['output_path']}/X_{self._data_suffix}_{self._output_path_suffix}", X)
             np.savez(f"{paths_dictionary['output_path']}/y_{self._data_suffix}_{self._output_path_suffix}", y)
+        
+    def __can_train_and_test_generate_features(self, paths_dictionary: typing.Dict):
+        print(">> Iniciando processamento em lotes (chunks) para CAN...")
+        chunk_size = 50000
 
+        X_list = []
+        Y_list = []
+        
+        # Loop para processar o CSV em blocos visando otimizar o uso de memória RAM
+        for chunk in pd.read_csv(paths_dictionary["train_csv_path"], chunksize=chunk_size):
+            
+            packets_bytes_list = []
+            
+            # Itera pelas linhas do bloco atual processando as colunas hexadecimais
+            for _, row in chunk.iterrows():
+                # 1. Trata e padroniza o ID (garante 4 bytes = 8 caracteres hexadecimais)
+                arb_id_hex = str(row['arbitration_id']).upper().strip().zfill(8)
+                
+                # 2. Trata e padroniza os dados (garante payload fixo de 8 bytes = 16 caracteres hexadecimais)
+                data_field_hex = str(row['data_field']).upper().strip().ljust(16, '0')
+                
+                # 3. Concatena gerando uma string exata de 24 caracteres hexadecimais (12 bytes)
+                full_hex_packet = arb_id_hex + data_field_hex
+                
+                # 4. Agrupa os caracteres de dois em dois para converter em inteiros de 1 byte (0 a 255)
+                packet_bytes = [int(full_hex_packet[i:i+2], 16) for i in range(0, len(full_hex_packet), 2)]
+                packets_bytes_list.append(packet_bytes)
+                
+            # Transforma a estrutura temporária em uma matriz nativa do NumPy
+            packets_array = np.array(packets_bytes_list, dtype='uint8')
+            
+            # --- ALTERAÇÃO E ALINHAMENTO COM TOW ---
+            # Em vez de passar uma lista simples de labels, passamos o par de colunas necessário.
+            # Assim, o __aggregate_based_on_window_size pode aplicar o schema correto (One ou Multi)
+            labels_df = chunk[['attack', 'attack_Type']].reset_index(drop=True)
+
+            # Reutiliza o pré-processamento original
+            preprocessed_packets = self.__preprocess_raw_packets(packets_array, split_into_nibbles=True)
+
+            # Agregação por Janela Deslizante (Passando o DataFrame de labels assim como no TOW)
+            aggregated_X, aggregated_y = self.__aggregate_based_on_window_size(preprocessed_packets, labels_df)
+            
+            if len(aggregated_X) > 0:
+                X_list.append(aggregated_X)
+                Y_list.extend(aggregated_y)
+                
+            # Força a liberação de memória RAM
+            del packets_bytes_list
+            del packets_array
+            del labels_df
+            gc.collect()
+
+        if len(X_list) == 0:
+            raise ValueError("Erro: Nenhuma janela válida foi gerada. Verifique o tamanho do dataset.")
+
+        # Junta todos os blocos processados
+        X = np.concatenate(X_list, axis=0, dtype='uint8')
+        
+        # Identifica dinamicamente o tipo de dado de Y (pode ser int do binário ou string do multiclasse)
+        Y = np.array(Y_list)
+
+        # Salva os arquivos finais formatados na pasta de destino (Idêntico ao padrão do TOW)
+        np.savez(f"{paths_dictionary['output_path']}/X_{self._data_suffix}_{self._output_path_suffix}", X)
+        
+        Y_df = pd.DataFrame(Y, columns=["Class"])
+        Y_df.to_csv(f"{paths_dictionary['output_path']}/y_{self._data_suffix}_{self._output_path_suffix}.csv", index=False)
+        print(f">> Processamento concluído com sucesso! Formato final de X: {X.shape} | Y: {Y.shape}")
 
     def load_features(self, paths_dictionary: typing.Dict):
         X = np.load(paths_dictionary['X_path'])
