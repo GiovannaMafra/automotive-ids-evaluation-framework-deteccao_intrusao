@@ -5,7 +5,6 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
-#SBATCH --partition=normal
 
 # Criando uma pasta temporária única para este Job (evita erro de permissão)
 cdir="/tmp/process_can_${SLURM_JOB_ID}"
