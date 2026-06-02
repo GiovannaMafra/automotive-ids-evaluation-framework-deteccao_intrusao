@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Paths
+#BASE_PATH="automotive-ids-evaluation-framework"
 #BASE_PATH="~/workspace/automotive-ids-evaluation-framework"
 BASE_PATH=$(pwd)
 FEAT_GEN_CONFIG_FOLDER="config_jsons/feat_generator"

@@ -48,7 +48,7 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
         self._run_id = f"{datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}_pytorch_test"
 
         # TODO: Get this from json config file
-        art_path = "~/workspace/artifacts"
+        art_path = "artifacts"
         self._artifacts_path = os.path.expanduser(f"{art_path}/{self._run_id}")
 
         if not os.path.exists(self._artifacts_path):
@@ -238,10 +238,9 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
 
         # Use gpu to train as preference
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        fold_index = None
 
         # for fold_index in self._presaved_models_state_dict.keys():
-        print('------------fold no---------{}----------------------'.format(fold_index))
+
 
         testloader = torch.utils.data.DataLoader(
                     data,
@@ -254,6 +253,9 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
 
         for presaved_key in self._presaved_models_state_dict.keys():
             fold_index = presaved_key
+
+            print(f'------------fold no---------{fold_index}----------------------')
+            
             self._model.load_state_dict(torch.load(self._presaved_models_state_dict[presaved_key], map_location='cpu'))
 
             self._model.to(device)

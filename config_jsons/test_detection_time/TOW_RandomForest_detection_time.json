@@ -31,11 +31,11 @@
             "models_output_path":"/content/models"
         },
         "presaved_paths": {
-            "0": "trained_models/TOW/first_stage/TOW_RandomForestClassifier_fold_0.pkl",
-            "1": "trained_models/TOW/first_stage/TOW_RandomForestClassifier_fold_1.pkl",
-            "2": "trained_models/TOW/first_stage/TOW_RandomForestClassifier_fold_2.pkl",
-            "3": "trained_models/TOW/first_stage/TOW_RandomForestClassifier_fold_3.pkl",
-            "4": "trained_models/TOW/first_stage/TOW_RandomForestClassifier_fold_4.pkl"
+            "0": "trained_models/TOW/first_stage/RandomForestClassifier_fold_0_our.pkl",
+            "1": "trained_models/TOW/first_stage/RandomForestClassifier_fold_1_our.pkl",
+            "2": "trained_models/TOW/first_stage/RandomForestClassifier_fold_2_our.pkl",
+            "3": "trained_models/TOW/first_stage/RandomForestClassifier_fold_3_our.pkl",
+            "4": "trained_models/TOW/first_stage/RandomForestClassifier_fold_4_our.pkl"
         }
     }
 }

@@ -27,15 +27,15 @@
             "num_outputs": 1
         },
         "paths": {
-            "metrics_output_path":"~/workspace/metrics",
-            "models_output_path":"~/workspace/models"
+            "metrics_output_path":"metrics",
+            "models_output_path":"models"
         },
         "presaved_paths": {
-            "0": "~/workspace/automotive-ids-evaluation-framework/trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_0",
-            "1": "~/workspace/automotive-ids-evaluation-framework/trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_1",
-            "2": "~/workspace/automotive-ids-evaluation-framework/trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_2",
-            "3": "~/workspace/automotive-ids-evaluation-framework/trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_3",
-            "4": "~/workspace/automotive-ids-evaluation-framework/trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_4"
+            "0": "trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_0",
+            "1": "trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_1",
+            "2": "trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_2",
+            "3": "trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_3",
+            "4": "trained_models/AVTP/CNNIDS/AVTP_pytorch_model_CNNIDS_4"
         }
     }
 }
