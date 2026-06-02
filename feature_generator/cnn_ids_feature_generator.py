@@ -227,7 +227,9 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
                 )
             y = np.array(y["Class"].values)
         else:
-            y = np.load(paths_dictionary['y_path'])
+            #y = np.load(paths_dictionary['y_path'])
+            #o can_train gera um y .csv
+            y = pd.read_csv(paths_dictionary['y_path']).values.ravel()
             y = y.f.arr_0
 
         print(f"shape Y = {y.shape}")
