@@ -15,7 +15,7 @@ echo ">> Garantindo que o gdown está instalado no nó..."
 python3 -m pip install --user gdown
 
 echo ">> Baixando o dataset do Google Drive..."
-python3 -m gdown --id "1sjYWPOAZ62mvlFKPOtJNO-mOIlHQXoTk" -O "$cdir/dataset.zip"
+python3 -m gdown "1sjYWPOAZ62mvlFKPOtJNO-mOIlHQXoTk" -O "$cdir/dataset.zip"
 
 echo ">> Extraindo APENAS a pasta set_01 para economizar espaço..."
 # O "*/set_01/*" diz para o unzip ignorar o set_02, set_03, set_04, etc.
