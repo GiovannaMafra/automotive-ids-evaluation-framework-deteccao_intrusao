@@ -11,7 +11,8 @@ cdir="/tmp/process_can_${SLURM_JOB_ID}"
 mkdir -p "$cdir"
 
 echo ">> Garantindo que as bibliotecas estão instaladas no nó..."
-python3 -m pip install --user --upgrade gdown "numpy<2.0.0" "pandas<2.0.0"
+# Adicionado 'scapy' na lista de instalação
+python3 -m pip install --user --upgrade gdown scapy "numpy<2.0.0" "pandas<2.0.0"
 
 echo ">> Baixando a pasta concatenada do Google Drive..."
 # ATENÇÃO: Substitua "COLOQUE_O_NOVO_ID_AQUI" pelo ID real do novo link do Drive!
