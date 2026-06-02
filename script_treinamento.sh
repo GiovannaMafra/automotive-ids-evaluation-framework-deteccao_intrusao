@@ -8,8 +8,7 @@
 #SBATCH --output=slurm_train_rf_%j.out 
 #SBATCH --signal=USR1@5
 
-echo ">> Verificando/Garantindo que o scikit-learn está instalado..."
-python3 -m pip install --user --upgrade scikit-learn "numpy<2.0.0" "pandas<2.0.0"
+python3 -m pip install --user --upgrade scikit-learn torch torchmetrics "numpy<2.0.0" "pandas<2.0.0"
 
 echo ">> Entrando na pasta do framework..."
 cd /home/CIN/gmm8/automotive-ids-evaluation-framework-deteccao_intrusao
