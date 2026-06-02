@@ -11,17 +11,16 @@ cdir="/tmp/process_can_${SLURM_JOB_ID}"
 mkdir -p "$cdir"
 
 echo ">> Garantindo que as bibliotecas estão instaladas no nó..."
-# Adicionado 'scapy' na lista de instalação
-python3 -m pip install --user --upgrade gdown scapy "numpy<2.0.0" "pandas<2.0.0"
+# ---> ALTERADO AQUI: Adicionado 'scikit-learn' <---
+python3 -m pip install --user --upgrade gdown scapy scikit-learn "numpy<2.0.0" "pandas<2.0.0"
 
 echo ">> Baixando a pasta concatenada do Google Drive..."
 # ATENÇÃO: Substitua "COLOQUE_O_NOVO_ID_AQUI" pelo ID real do novo link do Drive!
 python3 -m gdown "1TFRx9hXVQsAIJ3K18OvGUasdGN-Wie7e" -O "$cdir/dataset_concatenado.zip"
 
 echo ">> Extraindo os arquivos na sua Home..."
-# Cria a pasta base e extrai o zip (ajustando permissões)
-mkdir -p ~/can_train_test_concatenado
-unzip -q "$cdir/dataset_concatenado.zip" -d ~/can_train_test_concatenado/
+# ---> ALTERADO AQUI: Adicionado '-qo' para sobrescrever sem perguntar e extraindo direto em '~/' <---
+unzip -qo "$cdir/dataset_concatenado.zip" -d ~/
 chmod -R 755 ~/can_train_test_concatenado/
 
 echo ">> Criando a pasta de saída para as features geradas..."
