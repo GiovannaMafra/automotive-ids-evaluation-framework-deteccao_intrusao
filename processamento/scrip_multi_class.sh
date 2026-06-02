@@ -1,6 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=can_one_class
 #SBATCH --output=slurm_one_class_%j.out
+#SBATCH --partition=short-simple
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=4
