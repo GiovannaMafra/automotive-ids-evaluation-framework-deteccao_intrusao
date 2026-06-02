@@ -10,6 +10,10 @@
 cdir="/tmp/process_can_${SLURM_JOB_ID}"
 mkdir -p "$cdir"
 
+echo ">> Garantindo que o gdown está instalado no nó..."
+# Instala o gdown na área do usuário antes de tentar o download
+python3 -m pip install --user gdown
+
 echo ">> Baixando o dataset do Google Drive..."
 python3 -m gdown --id "1sjYWPOAZ62mvlFKPOtJNO-mOIlHQXoTk" -O "$cdir/dataset.zip"
 
