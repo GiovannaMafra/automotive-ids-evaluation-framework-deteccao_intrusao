@@ -24,8 +24,8 @@ unzip -qo "$cdir/dataset_concatenado.zip" -d ~/
 chmod -R 755 ~/can_train_test_concatenado/
 
 echo ">> Criando a pasta de saída para as features geradas..."
-# Garante que a pasta 'processed_one_class' exista para o framework não dar erro ao salvar
-mkdir -p ~/can_train_test_concatenado/processed_one_class
+# ALTERADO: Agora cria a subpasta 'train'
+mkdir -p ~/can_train_test_concatenado/processed_one_class/train
 
 echo ">> Executando o framework (Gerador de Features One-Class)..."
 # Abre um sub-shell, vai até a pasta real do framework e roda o script lá de dentro

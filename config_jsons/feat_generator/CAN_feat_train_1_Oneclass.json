@@ -12,10 +12,10 @@
     },
     "paths": {
         "train_csv_path": "~/can_train_test_concatenado/train_01/concatenated_train.csv",
-        "output_path": "~/can_train_test_concatenado/processed_one_class"
+        "output_path": "~/can_train_test_concatenado/processed_one_class/train"
     },
     "load_paths": {
-        "X_path": "~/can_train_test_concatenado/processed_one_class/X_test_can_train_test_one_class_Wsize_44_Cols_24_Wslide_1_MC_False.npz",
-        "y_path": "~/can_train_test_concatenado/processed_one_class/y_test_can_train_test_one_class_Wsize_44_Cols_24_Wslide_1_MC_False.csv"
+        "X_path": "~/can_train_test_concatenado/processed_one_class/train/X_train_can_train_test_one_class_Wsize_44_Cols_24_Wslide_1_MC_False.npz",
+        "y_path": "~/can_train_test_concatenado/processed_one_class/train/y_train_can_train_test_one_class_Wsize_44_Cols_24_Wslide_1_MC_False.csv"
     }
 }

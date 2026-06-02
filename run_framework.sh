@@ -44,7 +44,7 @@ DETECTION_TIME_CONFIG_PATH="${BASE_PATH}/${DETECTION_TIME_CONFIG_FOLDER}/${SELEC
 # Run the feature generator step
 # venv/bin/python3 execute_feature_generator.py --feat_gen_config ${FEAT_GEN_CONFIG_PATH} --bench_time
 echo ">> Iniciando execute_feature_generator.py com: ${FEAT_GEN_CONFIG_PATH}"
-python3 execute_feature_generator.py --feat_gen_config ${FEAT_GEN_CONFIG_PATH} --bench_time
+python3 execute_feature_generator.py --feat_gen_config ${FEAT_GEN_CONFIG_PATH}
 
 # Run the model training and validation step
 # venv/bin/python3 execute_model_train_validation.py --model_train_valid_config ${MODEL_TRAIN_VALID_CONFIG_PATH}
