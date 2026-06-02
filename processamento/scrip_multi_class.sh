@@ -5,6 +5,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
+#SBATCH --time=04:00:00
 
 # 1. Pasta temporária para o download
 cdir="/tmp/process_can_${SLURM_JOB_ID}"
