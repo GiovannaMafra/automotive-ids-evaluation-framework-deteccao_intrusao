@@ -40,13 +40,13 @@ def process_csv_files(target_dir):
             
             try:
                 df = pd.read_csv(file_path)
-                if 'Attack' not in df.columns:
-                    print(f"Aviso: Coluna 'Attack' não encontrada em {file_name}. Pulando...")
+                if 'attack' not in df.columns:
+                    print(f"Aviso: Coluna 'attack' não encontrada em {file_name}. Pulando...")
                     continue
                 
                 # Regra: Se Attack == 1 coloca o tipo do ataque, se for 0 coloca 'normal'
                 attack_type = get_attack_type(attack_type);
-                df['Attack_Type'] = df['Attack'].apply(lambda x: attack_type if x == 1 else 'normal')
+                df['attack_Type'] = df['attack'].apply(lambda x: attack_type if x == 1 else 'normal')
                 
                 # Salva por cima do arquivo liberando permissão de escrita
                 df.to_csv(file_path, index=False)
