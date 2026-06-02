@@ -6,7 +6,7 @@
         "number_of_bytes": 12,
         "multiclass": false,
         "labeling_schema": "can_train_and_test_one_class",
-        "dataset": "can_train_test",
+        "dataset": "can_train_and_test",
         "suffix": "test",
         "sum_x": true
     },
