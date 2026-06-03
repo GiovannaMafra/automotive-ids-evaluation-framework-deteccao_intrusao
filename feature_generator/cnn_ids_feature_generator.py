@@ -60,15 +60,17 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
         if not os.path.exists(paths_dictionary['output_path']):
             os.makedirs(paths_dictionary['output_path'])
 
-        # Load raw labels
-        labels = pd.read_csv(paths_dictionary["y_train_path"], header=None, names=["index", "Class", "Description"])
-        labels = labels.drop(columns=["index"])
-        converted_packets_list = []
+        if self._data_suffix == "test":
+            pcap_path_key = "test_packets_path"
+            labels_path_key = "y_test_path"
+        else:
+            pcap_path_key = "training_packets_path"
+            labels_path_key = "y_train_path"
 
-        print(">> Loading raw packets using PcapReader (Memory Efficient)...")
-        
-        
-        with PcapReader(paths_dictionary["training_packets_path"]) as packets_stream:
+        # 2. O código agora usa a variável para abrir o arquivo correto automaticamente
+        labels = pd.read_csv(paths_dictionary[labels_path_key], header=None, names=["index", "Class", "Description"])
+        ...
+        with PcapReader(paths_dictionary[pcap_path_key]) as packets_stream:
             for raw_packet in packets_stream:
                 converted_packet = np.frombuffer(raw(raw_packet), dtype='uint8')
 
