@@ -1,0 +1,21 @@
+{
+    "feature_generator": "CNNIDSFeatureGenerator",
+    "config": {
+        "window_size": 44,
+        "window_slide": 1,
+        "number_of_bytes": 12,
+        "multiclass": false,
+        "labeling_schema": "can_train_and_test_one_class",
+        "dataset": "can_train_and_test",
+        "suffix": "test",
+        "sum_x": true
+    },
+    "paths": {
+        "test_01_csv_path": "~/can_train_test_concatenado/test_01_known_vehicle_known_attack/concatenated_test_01.csv",
+        "output_path": "~/can_train_test_concatenado/processed_one_class/test_01"
+    },
+    "load_paths": {
+        "X_path": "~/can_train_test_concatenado/processed_one_class/test_01/X_test_can_test_01_test_one_class_Wsize_44_Cols_24_Wslide_1_MC_False.npz",
+        "y_path": "~/can_train_test_concatenado/processed_one_class/test_01/y_test_can_test_01_test_one_class_Wsize_44_Cols_24_Wslide_1_MC_False.csv"
+    }
+}

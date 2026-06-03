@@ -15,7 +15,7 @@ DETECTION_TIME_CONFIG_FOLDER="config_jsons/test_detection_time"
 # SELECTED_FEAT_GEN_CONFIG="TOW_CNNIDS_Multiclass_train.json"
 # SELECTED_FEAT_GEN_CONFIG="TOW_CNNIDS_Oneclass_train.json"
 #SELECTED_FEAT_GEN_CONFIG="CAN_feat_train_1_Multiclass.json"
-SELECTED_FEAT_GEN_CONFIG="CAN_CNNIDS_multiclass.json"
+SELECTED_FEAT_GEN_CONFIG="CAN_test_01_Oneclass.json"
 
 ## Model train validate configs
 # SELECTED_MODEL_TRAIN_VALIDATE_CONFIG="AVTP_CNNIDS_train.json"

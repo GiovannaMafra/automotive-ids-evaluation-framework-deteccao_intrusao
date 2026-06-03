@@ -1,10 +1,11 @@
 #!/bin/bash
 #SBATCH --job-name=can_one_class
 #SBATCH --output=slurm_one_class_%j.out
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=4
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
 #SBATCH --mem=16G
+#SBATCH -p short-simple
+#SBATCH --qos=simple
 
 # 1. Pasta temporária para o download
 cdir="/tmp/process_can_${SLURM_JOB_ID}"
@@ -25,7 +26,7 @@ chmod -R 755 ~/can_train_test_concatenado/
 
 echo ">> Criando a pasta de saída para as features geradas..."
 # ALTERADO: Agora cria a subpasta 'train'
-mkdir -p ~/can_train_test_concatenado/processed_one_class/train
+mkdir -p ~/can_train_test_concatenado/processed_one_class/test_01
 
 echo ">> Executando o framework (Gerador de Features One-Class)..."
 # Abre um sub-shell, vai até a pasta real do framework e roda o script lá de dentro
