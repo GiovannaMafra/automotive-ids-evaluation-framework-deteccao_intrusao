@@ -153,8 +153,11 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
 
         if (self._dataset == "TOW_IDS_dataset"):
             y = pd.read_csv(paths_dictionary['y_path'])
-            y = y.drop(columns=["Unnamed: 0"])
-            if self._dataset == "TOW_IDS_multiclass":
+            if "Unnamed: 0" in y.columns:
+                y = y.drop(columns=["Unnamed: 0"])
+            
+            # CORREÇÃO 1: Agora olha para self._multiclass (corrige o bug do IF que travava o treino/teste)
+            if self._multiclass:
                 y["Class"] = y["Class"].map(
                     {
                         "Normal": 0,
@@ -174,8 +177,16 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
 
         if (self._multiclass):
             y = y.reshape(-1, 1)
-            ohe = OneHotEncoder(handle_unknown='ignore', sparse_output=False).fit(y)
-            y = ohe.transform(y)
+            
+            # CORREÇÃO 2: Força o OneHotEncoder a mapear SEMPRE as 6 colunas (0 a 5)
+            # Isso impede que a falta de um ataque no PCAP de teste mude o tamanho da matriz
+            if self._dataset == "TOW_IDS_dataset":
+                categories = [np.array([0, 1, 2, 3, 4, 5], dtype=int)]
+                ohe = OneHotEncoder(categories=categories, handle_unknown='ignore', sparse_output=False)
+                y = ohe.transform(y)
+            else:
+                ohe = OneHotEncoder(handle_unknown='ignore', sparse_output=False).fit(y)
+                y = ohe.transform(y)
 
         return [[X[i], y[i]] for i in range(X.shape[0])]
 
