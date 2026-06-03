@@ -16,8 +16,8 @@
     },
     "model_specs": {
         "framework": "pytorch",
-        "model": "CNNIDS",
-        "model_name": "CNNIDS",
+        "model": "MultiClassCNNIDS",
+        "model_name": "MultiClassCNNIDS",
         "criterion": "categorical-cross-entropy",
         "hyperparameters": {
             "batch_size": 64,

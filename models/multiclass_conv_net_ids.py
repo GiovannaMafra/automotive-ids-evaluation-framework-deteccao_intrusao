@@ -34,7 +34,7 @@ class MultiClassConvNetIDS(nn.Module):
         x = torch.flatten(x, 1)
         x = self.binary_classification_layer_fc1(x)
         x = self.binary_classification_layer_fc2(x)
-        x = torch.sigmoid(x)
+        #x = torch.sigmoid(x)
         return x
 
     def cnn_forward(self, x):
