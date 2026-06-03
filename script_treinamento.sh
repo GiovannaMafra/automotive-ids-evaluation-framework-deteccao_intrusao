@@ -3,9 +3,10 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=16G
+#SBATCH --gres=gpu:1
 #SBATCH -p short-simple
 #SBATCH --qos=simple
-#SBATCH --output=slurm_train_rf_%j.out 
+#SBATCH --output=slurm_train_cnn_%j.out
 #SBATCH --signal=USR1@5
 
 python3 -m pip install --user --upgrade scikit-learn torch torchmetrics "numpy<2.0.0" "pandas<2.0.0"
