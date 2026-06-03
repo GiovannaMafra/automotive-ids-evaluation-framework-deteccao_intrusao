@@ -67,8 +67,15 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
             pcap_path_key = "training_packets_path"
             labels_path_key = "y_train_path"
 
+        print(f">> Processing TOW_IDS dataset for: {self._data_suffix.upper()}")
+
+
+
         # 2. O código agora usa a variável para abrir o arquivo correto automaticamente
         labels = pd.read_csv(paths_dictionary[labels_path_key], header=None, names=["index", "Class", "Description"])
+        labels = labels.drop(columns=["index"])
+
+        converted_packets_list = []
         ...
         with PcapReader(paths_dictionary[pcap_path_key]) as packets_stream:
             for raw_packet in packets_stream:
