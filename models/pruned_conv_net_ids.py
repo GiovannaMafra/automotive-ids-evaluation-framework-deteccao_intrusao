@@ -20,7 +20,7 @@ class PrunedConvNetIDS(nn.Module):
 
         self.binary_classification_layer_fc1 = nn.Sequential(
             nn.Dropout(p=0.3),
-            nn.Linear(in_features=8294, out_features=64),
+            nn.Linear(in_features=1716, out_features=64),
             nn.Dropout(p=0.3),
             nn.ReLU(),
         )
