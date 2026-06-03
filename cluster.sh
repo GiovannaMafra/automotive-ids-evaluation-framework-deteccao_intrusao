@@ -113,7 +113,10 @@ python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generat
 
 # test evaluation
 # python3 execute_model_test.py --model_test_config config_jsons/model_test/AVTP_MultiStage_test.json
-# python3 execute_model_test.py --model_test_config config_jsons/model_test/TOW_MC_PrunnedCNNIDS.json
+
+# python3 execute_model_test.py --model_test_config config_jsons/model_test/TOW_MC_PrunnedCNN_test.json
+# python3 execute_model_test.py --model_test_config config_jsons/model_test/TOW_Oneclass_test.json
+
 
 
 echo "Finish"   
