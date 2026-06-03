@@ -143,7 +143,10 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
                 target = target.reshape(-1, 1)
             #target = target.float()
             #para a cnn multiclass precisa ser um inteiro
-            target = target.long().squeeze()
+            #target = target.long().squeeze()
+            target = target.long().view(-1)
+            
+            # print(f"DEBUG -> Output: {output.shape} | Target: {target.shape}")
             # zero the parameter gradients
             optimizer.zero_grad()
 
