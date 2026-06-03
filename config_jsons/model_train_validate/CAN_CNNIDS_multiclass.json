@@ -16,15 +16,15 @@
     },
     "model_specs": {
         "framework": "pytorch",
-        "model": "MultiClassCNNIDS",
-        "model_name": "MultiClassCNNIDS",
+        "model": "PrunedCNNIDS",
+        "model_name": "PrunedCNNIDS",
         "criterion": "categorical-cross-entropy",
         "hyperparameters": {
             "batch_size": 64,
             "learning_rate": 0.001,
             "num_epochs": 30,
             "early_stopping_patience": 5,
-            "num_outputs": 6
+            "num_outputs": 4
         },
         "paths": {
             "metrics_output_path": "~/workspace/metrics",
