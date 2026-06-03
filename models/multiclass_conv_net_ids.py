@@ -20,7 +20,7 @@ class MultiClassConvNetIDS(nn.Module):
 
         self.binary_classification_layer_fc1 = nn.Sequential(
             nn.Dropout(p=0.3),
-            nn.Linear(in_features=20416, out_features=64),
+            nn.Linear(in_features=4224, out_features=64),
             nn.Dropout(p=0.3),
             nn.ReLU(),
         )
