@@ -141,7 +141,9 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
             data = data.float()
             if len(target.shape) == 1:
                 target = target.reshape(-1, 1)
-            target = target.float()
+            #target = target.float()
+            #para a cnn multiclass precisa ser um inteiro
+            target = target.long().squeeze()
             # zero the parameter gradients
             optimizer.zero_grad()
 
@@ -197,7 +199,9 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
                 data = data.float()
                 if len(target.shape) == 1:
                     target = target.reshape(-1, 1)
-                target = target.float()
+                #target = target.float()
+                 #para a cnn multiclass precisa ser um inteiro
+                target = target.long().squeeze()
 
                 # if (self._model_name == "MultiStageIDS"):
                 #     # Run stages
@@ -241,7 +245,9 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
                 data = data.float()
                 if len(target.shape) == 1:
                     target = target.reshape(-1, 1)
-                target = target.float()
+                #target = target.float()
+                 #para a cnn multiclass precisa ser um inteiro
+                target = target.long().squeeze()
 
                 # if (self._model_name == "MultiStageIDS"):
                 #     # Run stages
