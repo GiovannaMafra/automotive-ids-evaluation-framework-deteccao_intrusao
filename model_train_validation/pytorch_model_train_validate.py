@@ -249,14 +249,27 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
             precision_score = BinaryPrecision().to(device)
             recall_score = BinaryRecall().to(device)
 
+        sample_input_shape = None
+
         with torch.no_grad():
             for data, target in testloader:
-                data = data.float()
-                if len(target.shape) == 1:
-                    target = target.reshape(-1, 1)
+                # Armazena o shape real dos dados (ex: [1, 44, 24]) excluindo o batch size
+                if sample_input_shape is None:
+                    sample_input_shape = list(data.shape[1:])
+
+                # Envia os dados para a GPU/CPU correta
+                data = data.float().to(device)
+                #data = data.float()
+                # if len(target.shape) == 1:
+                #     target = target.reshape(-1, 1)
                 #target = target.float()
-                 #para a cnn multiclass precisa ser um inteiro
-                target = target.long().squeeze()
+
+                #para a cnn multiclass precisa ser um inteiro
+                if target.ndim > 1 and target.size(1) > 1:
+                    target = target.argmax(dim=1)
+                else:
+                    target = target.view(-1)
+                target = target.long().to(device)
 
                 # if (self._model_name == "MultiStageIDS"):
                 #     # Run stages
@@ -275,10 +288,10 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
                 accuracy_metric.update(output.detach(), target)
                 f1_score_metric.update(output.detach(), target)
                 # TODO: Find a better way to perform this computation
-                if self._number_of_outputs == 6:
-                    auc_roc_metric.update(output.detach(), torch.argmax(target, dim=1))
-                else:
-                    auc_roc_metric.update(output.detach(), target)
+                #if self._number_of_outputs == 6:
+                    #auc_roc_metric.update(output.detach(), torch.argmax(target, dim=1))
+                #else:
+                auc_roc_metric.update(output.detach(), target)
                 precision_score.update(output.detach(), target)
                 recall_score.update(output.detach(), target)
 
@@ -289,8 +302,15 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
             prec = precision_score.compute().cpu().numpy()
             recall = recall_score.compute().cpu().numpy()
 
+            # SEGURO: Cria o dummy_input dinamicamente baseado no formato real dos seus dados do CAN
+            if sample_input_shape is None:
+                # Fallback caso o loader estivesse vazio (improvável)
+                sample_input_shape = [1, 44, 116]
+
             # TODO: Get the data format using the data
-            dummy_input = torch.randn(1, 1, 44, 116, dtype=torch.float).to(device)
+            #dummy_input = torch.randn(1, 1, 44, 116, dtype=torch.float).to(device)
+            dummy_input = torch.randn(1, *sample_input_shape, dtype=torch.float).to(device)
+            
             if device.type == "cpu":
                 timing_func = timing.pytorch_inference_time_cpu
             else:
