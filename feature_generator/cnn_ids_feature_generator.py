@@ -182,7 +182,7 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
             # Isso impede que a falta de um ataque no PCAP de teste mude o tamanho da matriz
             if self._dataset == "TOW_IDS_dataset":
                 categories = [np.array([0, 1, 2, 3, 4, 5], dtype=int)]
-                ohe = OneHotEncoder(categories=categories, handle_unknown='ignore', sparse_output=False)
+                ohe = OneHotEncoder(categories=categories, handle_unknown='ignore', sparse_output=False).fit(y)
                 y = ohe.transform(y)
             else:
                 ohe = OneHotEncoder(handle_unknown='ignore', sparse_output=False).fit(y)
