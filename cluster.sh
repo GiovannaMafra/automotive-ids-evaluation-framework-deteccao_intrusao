@@ -92,10 +92,9 @@ python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generat
 
 
 # feature generator test 
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_sumX_test.json
 #python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_test.json
 #python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Oneclass_test.json
-
-
 
 
 # training and validation
