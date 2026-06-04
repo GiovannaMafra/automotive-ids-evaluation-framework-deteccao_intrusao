@@ -11,7 +11,7 @@
         "sum_x": false
     },
     "paths": {
-        "train_csv_path": "/home/CIN/gmm8/can_train_test_concatenado/test_01/concatenated_test_01.csv",
+        "train_csv_path": "/home/CIN/gmm8/can_train_test_concatenado/test_01_known_vehicle_known_attack/concatenated_test_01.csv",
         "output_path": "/home/CIN/gmm8/can_train_test_concatenado/processed_multi_class/test_01"
     },
     "load_paths": {
