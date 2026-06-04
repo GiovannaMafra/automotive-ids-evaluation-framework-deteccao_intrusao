@@ -1,12 +1,11 @@
 #!/bin/bash
-#SBATCH --job-name=can_one_class
-#SBATCH --output=slurm_one_class_%j.out
-#SBATCH --partition=short-simple
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=4
+#SBATCH --job-name=can_multi_class
+#SBATCH --output=slurm_multi_class_%j.out
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
 #SBATCH --mem=16G
-#SBATCH --time=04:00:00
+#SBATCH -p short-simple
+#SBATCH --qos=simple
 
 # 1. Pasta temporária para o download
 cdir="/tmp/process_can_${SLURM_JOB_ID}"
@@ -27,13 +26,13 @@ chmod -R 755 ~/can_train_test_concatenado/
 
 echo ">> Criando a pasta de saída para as features geradas..."
 # ALTERADO: Agora cria a subpasta 'train'
-mkdir -p ~/can_train_test_concatenado/processed_multi_class/train
+mkdir -p ~/can_train_test_concatenado/processed_multi_class/teste_1
 
 echo ">> Executando o framework (Gerador de Features One-Class)..."
 # Abre um sub-shell, vai até a pasta real do framework e roda o script lá de dentro
 cd /home/CIN/gmm8/automotive-ids-evaluation-framework-deteccao_intrusao
 
-echo ">> Executando o framework (Gerador de Features One-Class)..."
+echo ">> Executando o framework (Gerador de Features Multi-Class)..."
 chmod +x run_framework.sh
 ./run_framework.sh
 
