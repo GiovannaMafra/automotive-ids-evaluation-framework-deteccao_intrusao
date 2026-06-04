@@ -39,7 +39,7 @@ echo ">> Arquivo limpo com sucesso! Continuando o pipeline..."
 
 echo ">> Criando a pasta de saída para as features geradas..."
 # ALTERADO: Agora cria a subpasta 'train'
-mkdir -p ~/can_train_test_concatenado/processed_one_class/test_03
+mkdir -p ~/can_train_test_concatenado/processed_one_class/test_04
 
 echo ">> Executando o framework (Gerador de Features One-Class)..."
 # Abre um sub-shell, vai até a pasta real do framework e roda o script lá de dentro
