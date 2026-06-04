@@ -28,7 +28,7 @@ echo ">> Arquivo baixado. Iniciando limpeza expressa de 'NA'..."
 
 python3 -c "
 import pandas as pd
-path = '/home/CIN/gmm8/can_train_test_concatenado/test_03_known_vehicle_unknown_attack/concatenated_test_03.csv'
+path = '/home/CIN/gmm8/can_train_test_concatenado/test_04_unknown_vehicle_unknown_attack/concatenated_test_04.csv'
 df = pd.read_csv(path)
 df = df.dropna()
 for col in df.select_dtypes(include=['object']).columns:
