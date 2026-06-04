@@ -11,7 +11,7 @@
         "sum_x": true
     },
     "paths": {
-        "test_01_csv_path": "~/can_train_test_concatenado/test_01_known_vehicle_known_attack/concatenated_test_01.csv",
+        "train_csv_path": "~/can_train_test_concatenado/test_01_known_vehicle_known_attack/concatenated_test_01.csv",
         "output_path": "~/can_train_test_concatenado/processed_one_class/test_01"
     },
     "load_paths": {
