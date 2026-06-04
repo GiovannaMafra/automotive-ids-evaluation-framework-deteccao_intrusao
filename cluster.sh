@@ -88,13 +88,12 @@ python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generat
 
 #python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_train.json ## for CNN
 #python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_train.json ## for CNN
-#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_sumX_train.json ## for CNN with sumX
-
 
 # feature generator test 
-#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_sumX_test.json
-#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_test.json
-#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Oneclass_test.json
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_sumX_test.json ## for RF
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_test.json ## for CNN
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_test.json ## for CNN
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Oneclass_test.json ## for RF
 
 
 # training and validation
