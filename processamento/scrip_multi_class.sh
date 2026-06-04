@@ -26,7 +26,7 @@ chmod -R 755 ~/can_train_test_concatenado/
 
 echo ">> Criando a pasta de saída para as features geradas..."
 # ALTERADO: Agora cria a subpasta 'train'
-mkdir -p ~/can_train_test_concatenado/processed_multi_class/teste_1
+mkdir -p ~/can_train_test_concatenado/processed_multi_class/teste_01
 
 echo ">> Executando o framework (Gerador de Features One-Class)..."
 # Abre um sub-shell, vai até a pasta real do framework e roda o script lá de dentro
