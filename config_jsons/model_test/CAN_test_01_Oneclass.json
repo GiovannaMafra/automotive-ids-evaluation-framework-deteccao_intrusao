@@ -7,7 +7,8 @@
             "number_of_bytes": 12,
             "multiclass": false,
             "labeling_schema": "can_train_and_test_one_class",
-            "dataset": "can_train_and_test"
+            "dataset": "can_train_and_test",
+            "sum_x": true
         },
         "load_paths": {
             "X_path": "~/can_train_test_concatenado/processed_one_class/test_01/X_test_can_train_and_test_one_class_Wsize_44_Cols_24_Wslide_1_MC_False_sumX_True.npz",
