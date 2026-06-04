@@ -11,8 +11,8 @@
         "sum_x": true
     },
     "paths": {
-        "test_packets_path": "datasets/tow-intrusion-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_19_50_training.pcap",
-        "training_packets_path": "datasets/tow-intrusion-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap",
+        "test_packets_path": "datasets/tow-intrusion-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap",
+        "training_packets_path": "datasets/tow-intrusion-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_19_50_training.pcap",
         "y_test_path": "datasets/tow-intrusion-dataset/raw/y_test.csv",
         "y_train_path": "datasets/tow-intrusion-dataset/raw/y_train.csv",
         "output_path": "datasets/tow-intrusion-dataset/processed"
