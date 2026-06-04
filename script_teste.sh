@@ -14,9 +14,9 @@ echo ">> Entrando na pasta do framework..."
 cd /home/CIN/gmm8/automotive-ids-evaluation-framework-deteccao_intrusao
 
 # Defina aqui o caminho do JSON que você salvou com as configurações do Random Forest
-SELECTED_MODEL_TRAIN_VALIDATE_CONFIG="config_jsons/model_test/CAN_test_01_Oneclass.json"
+SELECTED_MODEL_TRAIN_VALIDATE_CONFIG="config_jsons/model_test/CAN_test_03_Oneclass.json"
 
-echo ">> Iniciando o Teste do Random Forest para o CAN Teste 01..."
+echo ">> Iniciando o Teste do Random Forest para o CAN Teste 03..."
 python3 execute_model_test.py --model_test_config $SELECTED_MODEL_TRAIN_VALIDATE_CONFIG
 
 echo ">> Teste concluído!"
