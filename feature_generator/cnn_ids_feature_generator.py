@@ -101,7 +101,15 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
         # Aggregate features and labels
         print(">> Aggregating and labeling...")
         aggregated_X, aggregated_y = self.__aggregate_based_on_window_size(preprocessed_packets, labels)
-        
+
+        print(f">> [TOW-IDS | {self._data_suffix.upper()}] Total samples after feature generation: {len(aggregated_X)}")
+        print(f">> [TOW-IDS | {self._data_suffix.upper()}] X shape: {aggregated_X.shape}")
+        print(f">> [TOW-IDS | {self._data_suffix.upper()}] y length: {len(aggregated_y)}")
+
+        unique, counts = np.unique(aggregated_y, return_counts=True)
+        dist = dict(zip(unique, counts))
+        print(f">> [TOW-IDS | {self._data_suffix.upper()}] Class distribution: {dist}")
+
         # Salvando os arquivos gerados
         np.savez(f"{paths_dictionary['output_path']}/X_{self._data_suffix}_{self._output_path_suffix}", aggregated_X)
 
@@ -136,9 +144,18 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
             aggregated_X, aggregated_y = self.__aggregate_based_on_window_size(preprocessed_packets, labels)
             aggregated_y = np.array(aggregated_y, dtype='uint8')
 
+            print(f">> [AEID | {self._data_suffix.upper()}] Samples this file: {len(aggregated_X)}")
+
             # Concatenate both indoors injected packets
             X = np.concatenate((X, aggregated_X), axis=0, dtype='uint8')
             y = np.concatenate((y, aggregated_y), axis=0, dtype='uint8')
+
+            print(f">> [AEID | {self._data_suffix.upper()}] Total samples so far: {len(X)}")
+            print(f">> [AEID | {self._data_suffix.upper()}] X shape so far: {X.shape}")
+
+            ##create output path if doesnt exist
+            if not os.path.exists(paths_dictionary['output_path']):
+                os.makedirs(paths_dictionary['output_path'])
 
             np.savez(f"{paths_dictionary['output_path']}/X_{self._data_suffix}_{self._output_path_suffix}", X)
             np.savez(f"{paths_dictionary['output_path']}/y_{self._data_suffix}_{self._output_path_suffix}", y)
