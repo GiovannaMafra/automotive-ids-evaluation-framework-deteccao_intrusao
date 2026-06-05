@@ -168,11 +168,11 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
                 #     y_true[initial_entry + index] = target[index].clone()
                 # initial_entry = initial_entry + self._batch_size
 
-                target_1d = target.view(-1).long()
+                target_indices = torch.argmax(target, dim=1).long()
                 predicted_classes = torch.argmax(output, dim=1)
 
-                accuracy_metric.update(predicted_classes, target_1d)
-                f1_score_metric.update(predicted_classes, target_1d)
+                accuracy_metric.update(predicted_classes, target_indices)
+                f1_score_metric.update(predicted_classes, target_indices)
 
                 # accuracy_metric.update(output, target)
                 # f1_score_metric.update(output, target)
@@ -180,12 +180,12 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
                 if self._number_of_outputs == 6:
                     auc_roc_metric.update(output, torch.argmax(target, dim=1))
                 else:
-                    auc_roc_metric.update(output, target_1d)
+                    auc_roc_metric.update(output, target_indices)
                 # precision_score.update(output, target)
                 # recall_score.update(output, target)
                     
-                precision_score.update(predicted_classes, target_1d)
-                recall_score.update(predicted_classes, target_1d)
+                precision_score.update(predicted_classes, target_indices)
+                recall_score.update(predicted_classes, target_indices)
 
             # Calculate metrics
             acc = accuracy_metric.compute().cpu().numpy()
