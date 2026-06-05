@@ -209,7 +209,7 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
 
             # TODO: encontrar uma forma melhor de fazer esse reshape
             #y_true_roc = y_true.to(torch.int32)
-            y_true_roc_1d = torch.argmax(y_true_roc, dim=1).long()
+            y_true_roc_1d = torch.argmax(y_true, dim=1).long()
             if self._number_of_outputs == 6:
                 y_true_roc = torch.argmax(y_true_roc, dim=1)
             #fpr, tpr, thresholds = roc_metric(y_pred, y_true_roc)
