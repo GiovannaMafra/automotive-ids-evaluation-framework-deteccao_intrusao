@@ -198,10 +198,14 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
             # TODO: Esse reshape deve ocorrer apenas se for necessário
             y_pred_conf_matrix = y_pred
             y_true_conf_matrix = y_true
-            if self._number_of_outputs == 6:
-                y_pred_conf_matrix = torch.argmax(y_pred, dim=1)
-                y_true_conf_matrix = torch.argmax(y_true, dim=1)
-            confusion_matrix = confusion_matrix_metric(y_pred_conf_matrix, y_true_conf_matrix)
+            # if self._number_of_outputs == 6:
+            #     y_pred_conf_matrix = torch.argmax(y_pred, dim=1)
+            #     y_true_conf_matrix = torch.argmax(y_true, dim=1)
+            # confusion_matrix = confusion_matrix_metric(y_pred_conf_matrix, y_true_conf_matrix)
+
+            y_pred_1d = torch.argmax(y_pred_conf_matrix, dim=1).long()
+            y_true_1d = torch.argmax(y_true_conf_matrix, dim=1).long()
+            confusion_matrix = confusion_matrix_metric(y_pred_1d, y_true_1d)
 
             # TODO: encontrar uma forma melhor de fazer esse reshape
             y_true_roc = y_true.to(torch.int32)
