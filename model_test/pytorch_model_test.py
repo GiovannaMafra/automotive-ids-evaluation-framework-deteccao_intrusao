@@ -171,8 +171,8 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
                 target_1d = target.view(-1).long()
                 predicted_classes = torch.argmax(output, dim=1)
 
-                accuracy_metric.update(output, target_1d)
-                f1_score_metric.update(output, target_1d)
+                accuracy_metric.update(predicted_classes, target_1d)
+                f1_score_metric.update(predicted_classes, target_1d)
 
                 # accuracy_metric.update(output, target)
                 # f1_score_metric.update(output, target)
@@ -184,8 +184,8 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
                 # precision_score.update(output, target)
                 # recall_score.update(output, target)
                     
-                precision_score.update(output, target_1d)
-                recall_score.update(output, target_1d)
+                precision_score.update(predicted_classes, target_1d)
+                recall_score.update(predicted_classes, target_1d)
 
             # Calculate metrics
             acc = accuracy_metric.compute().cpu().numpy()
