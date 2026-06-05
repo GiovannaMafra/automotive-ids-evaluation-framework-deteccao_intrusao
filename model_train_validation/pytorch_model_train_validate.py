@@ -285,6 +285,13 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
 
                 output = self._model(data)
 
+                # 1. Se o modelo explodiu e gerou NaNs/Infs, converte para zero
+                output = torch.nan_to_num(output, nan=0.0, posinf=0.0, neginf=0.0)
+                
+                # 2. Corta qualquer label corrompido que seja < 0 ou >= num_classes
+                target = torch.clamp(target, min=0, max=self._number_of_outputs - 1)
+                # -------------------------------------------------------------
+
                 accuracy_metric.update(output.detach(), target)
                 f1_score_metric.update(output.detach(), target)
                 # TODO: Find a better way to perform this computation
