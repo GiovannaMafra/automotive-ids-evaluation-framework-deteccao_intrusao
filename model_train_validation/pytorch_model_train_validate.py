@@ -339,16 +339,16 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         # device = torch.device("cpu")
 
-        # Get this criterion from configuration parameter
-        criterion = None
-        if (self._criterion == 'binary-cross-entropy'):
-            criterion = nn.BCELoss()
-        elif (self._criterion == 'categorical-cross-entropy'):
-            criterion = nn.CrossEntropyLoss()
-        else:
-            raise KeyError(f"Selected criterion : {self._criterion} is NOT available!")
+        # # Get this criterion from configuration parameter
+        # criterion = None
+        # if (self._criterion == 'binary-cross-entropy'):
+        #     criterion = nn.BCELoss()
+        # elif (self._criterion == 'categorical-cross-entropy'):
+        #     criterion = nn.CrossEntropyLoss()
+        # else:
+        #     raise KeyError(f"Selected criterion : {self._criterion} is NOT available!")
 
-        skf = StratifiedKFold(n_splits=5, random_state=1, shuffle=True)
+        # skf = StratifiedKFold(n_splits=5, random_state=1, shuffle=True)
 
         # Get item from train data
         X = [item[0] for item in train_data]
@@ -360,6 +360,30 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
             y = np.array(y).argmax(1)
         except:
             pass
+
+        from sklearn.utils.class_weight import compute_class_weight
+        
+        # Encontra as classes únicas (ex: 0, 1, 2, 3) e calcula o peso "balanced"
+        classes_unicas = np.unique(y)
+        pesos_calculados = compute_class_weight(class_weight='balanced', classes=classes_unicas, y=y)
+        
+        # Converte o array numpy para tensor do PyTorch e envia para a GPU
+        class_weights_tensor = torch.tensor(pesos_calculados, dtype=torch.float32).to(device)
+        print(f"\n--- BALANCEAMENTO ATIVADO ---")
+        print(f"Classes identificadas: {classes_unicas}")
+        print(f"Pesos calculados: {pesos_calculados}\n")
+
+        # Get this criterion from configuration parameter
+        criterion = None
+        if (self._criterion == 'binary-cross-entropy'):
+            criterion = nn.BCELoss()
+        elif (self._criterion == 'categorical-cross-entropy'):
+            #criterion = nn.CrossEntropyLoss()
+            criterion = nn.CrossEntropyLoss(weight=class_weights_tensor)
+        else:
+            raise KeyError(f"Selected criterion : {self._criterion} is NOT available!")
+
+        skf = StratifiedKFold(n_splits=5, random_state=1, shuffle=True)
 
         # UNCOMENT THIS PART TO TRAIN USING STRATIFIED KFOLD
         for fold, (train_idx, test_idx) in enumerate(skf.split(X, y)):
