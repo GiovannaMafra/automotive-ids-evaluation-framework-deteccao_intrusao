@@ -168,15 +168,24 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
                 #     y_true[initial_entry + index] = target[index].clone()
                 # initial_entry = initial_entry + self._batch_size
 
-                accuracy_metric.update(output, target)
-                f1_score_metric.update(output, target)
-                # TODO: Find a better way to perform this computation
+                target = target.long()
+                predicted_classes = torch.argmax(output, dim=1)
+
+                accuracy_metric.update(predicted_classes, target)
+                f1_score_metric.update(predicted_classes, target)
+
+                # accuracy_metric.update(output, target)
+                # f1_score_metric.update(output, target)
+                # # TODO: Find a better way to perform this computation
                 if self._number_of_outputs == 6:
                     auc_roc_metric.update(output, torch.argmax(target, dim=1))
                 else:
                     auc_roc_metric.update(output, target)
-                precision_score.update(output, target)
-                recall_score.update(output, target)
+                # precision_score.update(output, target)
+                # recall_score.update(output, target)
+                    
+                precision_score.update(predicted_classes, target)
+                recall_score.update(predicted_classes, target)
 
             # Calculate metrics
             acc = accuracy_metric.compute().cpu().numpy()
