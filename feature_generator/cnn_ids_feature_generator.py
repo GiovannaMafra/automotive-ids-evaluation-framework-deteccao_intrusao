@@ -201,7 +201,6 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
         print(f">> [CAN-IDS | {self._data_suffix.upper()}] X shape: {aggregated_X.shape}")
         print(f">> [CAN-IDS | {self._data_suffix.upper()}] y length: {len(aggregated_y)}")
 
-
         # Salva os arquivos finais formatados na pasta de destino (Idêntico ao padrão do TOW)
         np.savez(f"{paths_dictionary['output_path']}/X_{self._data_suffix}_{self._output_path_suffix}", X)
         
