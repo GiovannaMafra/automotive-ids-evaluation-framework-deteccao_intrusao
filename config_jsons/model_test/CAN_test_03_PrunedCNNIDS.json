@@ -22,7 +22,7 @@
         "model_name": "PrunedCNNIDS",
         "hyperparameters": {
             "batch_size": 64,
-            "num_outputs": 4
+            "num_outputs": 5
         },
         "presaved_paths": {
             "0": "/home/CIN/gmm8/automotive-ids-evaluation-framework-deteccao_intrusao/artifacts/2026_06_03_16_23_40_pytorch_train/models/pytorch_model_PrunedCNNIDS_0_our",
