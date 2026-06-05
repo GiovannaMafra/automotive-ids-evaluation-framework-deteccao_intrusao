@@ -26,9 +26,9 @@ chmod -R 755 ~/can_train_test_concatenado/
 
 echo ">> Criando a pasta de saída para as features geradas..."
 # ALTERADO: Agora cria a subpasta 'train'
-mkdir -p ~/can_train_test_concatenado/processed_multi_class/test_01
+mkdir -p ~/can_train_test_concatenado/processed_multi_class/test_03
 
-echo ">> Executando o framework (Gerador de Features One-Class)..."
+echo ">> Executando o framework (Gerador de Features Multi-Class)..."
 # Abre um sub-shell, vai até a pasta real do framework e roda o script lá de dentro
 cd /home/CIN/gmm8/automotive-ids-evaluation-framework-deteccao_intrusao
 
