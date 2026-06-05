@@ -24,6 +24,19 @@ echo ">> Extraindo os arquivos na sua Home..."
 unzip -qo "$cdir/dataset_concatenado.zip" -d ~/
 chmod -R 755 ~/can_train_test_concatenado/
 
+echo ">> Arquivo baixado. Iniciando limpeza expressa de 'NA'..."
+
+python3 -c "
+import pandas as pd
+path = '/home/CIN/gmm8/can_train_test_concatenado/test_03_known_vehicle_unknown_attack/concatenated_test_03.csv'
+df = pd.read_csv(path)
+df = df.dropna()
+for col in df.select_dtypes(include=['object']).columns:
+    df = df[df[col] != 'NA']
+df.to_csv(path, index=False)
+"
+echo ">> Arquivo limpo com sucesso! Continuando o pipeline..."
+
 echo ">> Criando a pasta de saída para as features geradas..."
 # ALTERADO: Agora cria a subpasta 'train'
 mkdir -p ~/can_train_test_concatenado/processed_multi_class/test_03
