@@ -168,7 +168,7 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
                 #     y_true[initial_entry + index] = target[index].clone()
                 # initial_entry = initial_entry + self._batch_size
 
-                target = target.long()
+                target = target.squeeze().long()
                 predicted_classes = torch.argmax(output, dim=1)
 
                 accuracy_metric.update(predicted_classes, target)
