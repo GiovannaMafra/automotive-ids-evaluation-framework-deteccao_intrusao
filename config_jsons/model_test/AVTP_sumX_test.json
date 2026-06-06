@@ -6,13 +6,13 @@
             "window_slide": 1,
             "number_of_bytes": 58,
             "multiclass": false,
-            "labeling_schema": "TOW_IDS_dataset_one_class",
-            "dataset": "TOW_IDS_dataset",
+            "labeling_schema": "AVTP_Intrusion_dataset",
+            "dataset": "AVTP_Intrusion_dataset",
             "sum_x": true
         },
         "load_paths": {
-            "X_path": "datasets/tow-intrusion-dataset/processed/X_test_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
-            "y_path": "datasets/tow-intrusion-dataset/processed/y_test_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz"
+            "X_path": "datasets/avtp-intrusion-dataset/processed/X_test_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
+            "y_path": "datasets/avtp-intrusion-dataset/processed/y_test_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz"
         }
     },
    "model_specs": {
@@ -31,11 +31,11 @@
             "models_output_path":"/content/models"
         },
         "presaved_paths": {
-            "0": "trained_models/TOW/first_stage/RandomForestClassifier_fold_0_our.pkl",
-            "1": "trained_models/TOW/first_stage/RandomForestClassifier_fold_1_our.pkl",
-            "2": "trained_models/TOW/first_stage/RandomForestClassifier_fold_2_our.pkl",
-            "3": "trained_models/TOW/first_stage/RandomForestClassifier_fold_3_our.pkl",
-            "4": "trained_models/TOW/first_stage/RandomForestClassifier_fold_4_our.pkl"
+            "0": "trained_models/AVTP/first_stage/RandomForestClassifier_fold_0_our.pkl",
+            "1": "trained_models/AVTP/first_stage/RandomForestClassifier_fold_1_our.pkl",
+            "2": "trained_models/AVTP/first_stage/RandomForestClassifier_fold_2_our.pkl",
+            "3": "trained_models/AVTP/first_stage/RandomForestClassifier_fold_3_our.pkl",
+            "4": "trained_models/AVTP/first_stage/RandomForestClassifier_fold_4_our.pkl"
         }
     }
 }
