@@ -82,38 +82,40 @@ source ~/ids_venv/bin/activate
 
 # sleep infinity
 
-# feature generation
+# -------- feature generation
 #python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_sumX_train.json ## for RF
 python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Oneclass_train.json ## for RF
-
 #python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_train.json ## for CNN
 #python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_train.json ## for CNN
 
-# feature generator test 
+# -------- feature generator test 
 #python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_sumX_test.json ## for RF
+#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Oneclass_test.json ## for RF
 #python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/AVTP_CNNIDS_test.json ## for CNN
 #python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Multiclass_test.json ## for CNN
-#python3 execute_feature_generator.py --feat_gen_config config_jsons/feat_generator/TOW_CNNIDS_Oneclass_test.json ## for RF
 
 
-# training and validation
+# -------- training and validation
 #python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/AVTP_RandomForest_train.json ## for RF
 #python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/TOW_RandomForest_train.json ## for RF
 #python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/AVTP_PrunedCNNIDS_train.json ## for CNN
 #python3 execute_model_train_validation.py --model_train_valid_config config_jsons/model_train_validate/TOW_PrunedCNNIDS_Multiclass_train.json ## for CNN
 
-# detection time evaluation
+
+# -------- test evaluation
+# python3 execute_model_test.py --model_test_config config_jsons/model_test/AVTP_MultiStage_test.json
+
+# python3 execute_model_test.py --model_test_config config_jsons/model_test/AVTP_sumX_test.json ## for RF
+# python3 execute_model_test.py --model_test_config config_jsons/model_test/TOW_Oneclass_test.json ## for RF
+# python3 execute_model_test.py --model_test_config config_jsons/model_test/AVTP_MC_PrunedCNN_test.json ## for CNN
+# python3 execute_model_test.py --model_test_config config_jsons/model_test/TOW_MC_PrunedCNN_test.json ## for CNN
+
+
+# -------- detection time evaluation
 # python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/AVTP_RandomForest_detection_time.json
 # python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/TOW_RandomForest_detection_time.json
 # python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/AVTP_PrunedCNNIDS_detection_time.json
 # python3 execute_model_test.py --model_test_config config_jsons/test_detection_time/TOW_MC_PrunedCNNIDS_detection_time.json
-
-
-# test evaluation
-# python3 execute_model_test.py --model_test_config config_jsons/model_test/AVTP_MultiStage_test.json
-
-# python3 execute_model_test.py --model_test_config config_jsons/model_test/TOW_MC_PrunedCNN_test.json
-# python3 execute_model_test.py --model_test_config config_jsons/model_test/TOW_Oneclass_test.json
 
 
 echo "Finish"   
