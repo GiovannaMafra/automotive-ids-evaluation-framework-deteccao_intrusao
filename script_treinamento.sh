@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=train-rf-can
+#SBATCH --job-name=train-cnn-can
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=16G
@@ -15,7 +15,7 @@ echo ">> Entrando na pasta do framework..."
 cd /home/CIN/gmm8/automotive-ids-evaluation-framework-deteccao_intrusao
 
 # Defina aqui o caminho do JSON que você salvou com as configurações do Random Forest
-SELECTED_MODEL_TRAIN_VALIDATE_CONFIG="config_jsons/model_train_validate/CAN_rf_train_one_class.json"
+SELECTED_MODEL_TRAIN_VALIDATE_CONFIG="config_jsons/model_train_validate/CAN_CNNIDS_multiclass.json"
 
 echo ">> Iniciando o Treinamento do CNN (Multi-Class) para o CAN..."
 python3 execute_model_train_validation.py --model_train_valid_config $SELECTED_MODEL_TRAIN_VALIDATE_CONFIG
