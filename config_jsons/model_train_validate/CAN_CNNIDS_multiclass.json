@@ -20,15 +20,11 @@
         "model_name": "PrunedCNNIDS",
         "criterion": "categorical-cross-entropy",
         "hyperparameters": {
-            "batch_size": 128,
+            "batch_size": 64,
             "learning_rate": 0.001,
-            "optimizer": "adamw",
-            "weight_decay": 0.0001,
-            "lr_scheduler": "ReduceLROnPlateau",
-            "dropout_rate": 0.3,
-            "num_epochs": 50,
-            "early_stopping_patience": 7,
-            "num_outputs": 4
+            "num_epochs": 30,
+            "early_stopping_patience": 5,
+            "num_outputs": 6
         },
         "paths": {
             "metrics_output_path": "~/workspace/metrics",
